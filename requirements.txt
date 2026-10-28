@@ -1,0 +1,8 @@
+# Initial runtime dependency set for the Streamlit analytics app.
+# Reconcile this list against all imports and test a clean install before release.
+streamlit
+pandas
+numpy
+plotly
+fastf1
+requests
