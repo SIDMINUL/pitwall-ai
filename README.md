@@ -2,6 +2,8 @@
 
 **Formula 1 race-strategy analysis and planning dashboard** built with Python and Streamlit.
 
+**Live app:** [Launch PitWall AI](https://pitwall-ai-0808.streamlit.app/)
+
 PitWall AI brings race-session data, pace analysis, weather context, tyre information, candidate strategy generation, and sensitivity analysis into one interactive workspace. It is an actively developed research prototype—not an official F1 product and not a validated race-outcome predictor.
 
 ## What it does
