@@ -1296,10 +1296,6 @@ with strategy_tab:
             laps["TyreLife"], errors="coerce"
         ).notna().any()
     )
-    st.write("DEBUG — loaded type:", type(loaded).__name__)
-    st.write("DEBUG — laps shape:", laps.shape)
-    st.write("DEBUG — columns:", list(laps.columns))
-    st.write("DEBUG — has_tyre_data:", has_tyre_data)
 
     if has_tyre_data:
         # ---------------------------------------------------------
