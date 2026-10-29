@@ -34,7 +34,6 @@ When a selected race session is not available yet, the pre-race planner can gene
 
 The robustness view compares candidate strategies across multiple pit-loss and tyre-degradation scenarios. Scenario ranks and win rates describe only the tested assumptions; they are not real-world probabilities.
 
-> Screenshots supplied during the current review are being prepared for repository assets.
 
 ## Tech stack
 
