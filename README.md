@@ -1,66 +1,120 @@
 # PitWall AI
 
-An evidence-grounded Formula 1 race intelligence assistant combining historical race data, deterministic analytics, simulation, and GenAI.
+**Formula 1 race-strategy analysis and planning dashboard** built with Python and Streamlit.
 
-## Initial scope
+PitWall AI brings race-session data, pace analysis, weather context, tyre information, candidate strategy generation, and sensitivity analysis into one interactive workspace. It is an actively developed research prototype—not an official F1 product and not a validated race-outcome predictor.
 
-The first milestone is deliberately small: load a completed F1 session, inspect available data, calculate basic driver/pace metrics, and display them in a Streamlit dashboard. We will add weather-aware scenarios, tyre strategy simulation, RAG over regulations, and tool-using agents in later milestones.
+## What it does
 
-## Requirements
+- **Race-session exploration:** load supported historical sessions and inspect available lap and race data.
+- **Driver and pace analysis:** compare observed lap-time patterns and race-state information when source data supports it.
+- **Pre-race planning:** generate candidate pit strategies using configurable race assumptions.
+- **Tyre strategy analysis:** estimate compound-specific pace/degradation relationships when tyre compound and tyre-age observations are available.
+- **Robustness and sensitivity checks:** compare candidate strategies across specified pit-loss and degradation assumptions.
+- **Weather context:** load historical weather context for supported events.
+- **Data-quality messaging:** surface missing inputs instead of silently treating unavailable values as known.
 
-- Python 3.11 recommended
-- Internet connection for downloading FastF1 session data
-- Ollama is optional for the first milestone
+Available analyses depend on the selected event, session, provider coverage, and fields returned by each data source.
 
-## Windows setup (PowerShell)
+## Screenshots
 
-From `C:\my studies\projects`:
+Screenshots will be added after the current interface and deployment are finalized.
+
+## Tech stack
+
+- Python 3.11
+- Streamlit
+- Pandas and NumPy
+- Plotly
+- FastF1
+- Jolpica API-compatible race results data
+- Open-Meteo weather data
+
+## Run locally
+
+### 1. Clone the repository
 
 ```powershell
-mkdir pitwall-ai
+git clone https://github.com/SIDMINUL/pitwall-ai.git
 cd pitwall-ai
-# Extract the provided starter files into this folder if using the ZIP.
+```
+
+### 2. Create and activate a virtual environment
+
+```powershell
 py -3.11 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
-pip install -r requirements.txt
-streamlit run app.py
 ```
 
-If PowerShell blocks activation, run:
+If PowerShell blocks activation, run `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass` in that terminal, then activate the environment again.
+
+### 3. Install dependencies
+
 ```powershell
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+pip install -r requirements-dev.txt
 ```
 
-## Data/cache
+### 4. Start the dashboard
 
-FastF1 caches downloaded session data under `data/cache/`. Do not commit cache files or downloaded data.
+```powershell
+python -m streamlit run app.py
+```
 
-## Project structure
+Streamlit will print a local URL, normally `http://localhost:8501`.
+
+An internet connection is required for data providers. First loads may take longer while session data is downloaded and cached. The app does not require an OpenAI API key for its current core workflow.
+
+## Run tests and checks
+
+Run the focused automated strategy tests:
+
+```powershell
+python -m pytest tests/ -q
+python -m compileall -q app.py src
+```
+
+The `tests/` directory contains the automated test suite. Data-provider calls and exploratory model investigations are intentionally not run as part of the default test command.
+
+## Repository layout
 
 ```text
 pitwall-ai/
 ├── app.py
 ├── requirements.txt
-├── .env.example
-├── .gitignore
+├── requirements-dev.txt
 ├── src/
 │   └── pitwall/
-│       ├── __init__.py
-│       ├── data/
-│       │   ├── __init__.py
-│       │   └── fastf1_loader.py
-│       └── analytics/
-│           ├── __init__.py
-│           └── pace.py
-└── data/
-    └── cache/
+│       ├── analytics/    # pace, race state, planning and strategy models
+│       └── data/         # session, results, circuit, tyre and weather loaders
+├── tests/                # automated strategy tests
+├── docs/                 # development notes
+├── research scripts      # exploratory model and data validation utilities
+├── README.md
+├── CONTRIBUTING.md
+└── LICENSE
 ```
 
-## Initial data-quality rules
+## Model limitations
 
-- Never silently treat missing telemetry as zero.
-- Label derived values as estimates, not ground truth.
-- Distinguish observed data, calculated metrics, and LLM-generated explanations.
-- A strategy recommendation must include assumptions and uncertainty.
+- Strategy rankings are estimates from simplified assumptions and available observations; they are not guaranteed race outcomes.
+- Linear tyre-age fits are descriptive. Lap times are affected by driver pace, fuel load, traffic, track evolution, weather, setup, and session conditions.
+- Fit statistics such as R² do not establish causality or prove out-of-sample accuracy.
+- Sensitivity results reflect the scenarios explicitly tested; they are not real-world probability estimates.
+- Pit-stop rules, tyre allocation requirements, safety cars, virtual safety cars, traffic, and strategic interactions may not be fully represented.
+- Some race-result sources do not provide tyre compound or tyre-age data. Tyre-model analysis should report unavailable when required inputs are missing.
+
+Use this project for learning and exploratory analysis, not operational race decisions.
+
+## Data sources and attribution
+
+The app may retrieve public motorsport data from [FastF1](https://docs.fastf1.dev/), [Jolpica](https://github.com/jolpica/jolpica-f1), and weather information from [Open-Meteo](https://open-meteo.com/). Refer to each provider's documentation and terms for usage and attribution requirements. PitWall AI is an independent project and is not affiliated with Formula 1, the FIA, or any team.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) and [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md).
+
+## License
+
+Distributed under the MIT License; see [LICENSE](LICENSE).
