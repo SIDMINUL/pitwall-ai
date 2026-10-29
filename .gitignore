@@ -1,24 +1,38 @@
 # Python
 __pycache__/
 *.py[cod]
+*.pyo
 .venv/
 venv/
-.env
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
 
-# Local data/cache
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+
+# Local data and caches
 data/cache/
+data/fastf1_cache/
 data/raw/
 data/processed/
+.fastf1_cache/
+cache/
+*.sqlite
+*.sqlite3
+*.db
 *.parquet
 *.csv
-
-# Streamlit
-.streamlit/secrets.toml
+*.log
 
 # Editors / OS
 .vscode/
 .idea/
 .DS_Store
 Thumbs.db
-
-data/fastf1_cache/
