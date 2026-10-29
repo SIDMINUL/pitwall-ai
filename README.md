@@ -18,7 +18,23 @@ Available analyses depend on the selected event, session, provider coverage, and
 
 ## Screenshots
 
-Screenshots will be added after the current interface and deployment are finalized.
+### Session overview and historical analysis
+
+The dashboard summarizes the selected session and provides separate views for the race overview, driver and car pace, tyre stints, weather, results and data quality, and strategy simulation.
+
+### Historical strategy analysis
+
+The historical strategy view uses available session tyre observations to estimate compound pace and degradation, compare strategies by pit-stop count, and inspect candidate strategies. These outputs are descriptive estimates; they can be affected by missing tyre data, traffic, fuel load, track evolution, weather, and other race conditions.
+
+### Pre-race strategy planning
+
+When a selected race session is not available yet, the pre-race planner can generate illustrative strategy candidates from configurable race distance, pit-stop loss, stint constraints, and compound assumptions. The assumptions are not official tyre measurements, and estimated times should not be interpreted as verified race forecasts.
+
+### Robustness and sensitivity analysis
+
+The robustness view compares candidate strategies across multiple pit-loss and tyre-degradation scenarios. Scenario ranks and win rates describe only the tested assumptions; they are not real-world probabilities.
+
+> Screenshots supplied during the current review are being prepared for repository assets.
 
 ## Tech stack
 
@@ -90,7 +106,9 @@ pitwall-ai/
 │       └── data/         # session, results, circuit, tyre and weather loaders
 ├── tests/                # automated strategy tests
 ├── docs/                 # development notes
-├── research scripts      # exploratory model and data validation utilities
+├── research/             # exploratory model and data validation utilities
+│   ├── README.md
+│   └── archive/           # older single-race experiments
 ├── README.md
 ├── CONTRIBUTING.md
 └── LICENSE
