@@ -20,17 +20,25 @@ Available analyses depend on the selected event, session, provider coverage, and
 
 ### Session overview and historical analysis
 
+![PitWall AI dashboard overview](screenshots/dashboard-overview.png)
+
 The dashboard summarizes the selected session and provides separate views for the race overview, driver and car pace, tyre stints, weather, results and data quality, and strategy simulation.
 
 ### Historical strategy analysis
+
+![PitWall AI strategy simulator](screenshots/strategy-simulator.png)
 
 The historical strategy view uses available session tyre observations to estimate compound pace and degradation, compare strategies by pit-stop count, and inspect candidate strategies. These outputs are descriptive estimates; they can be affected by missing tyre data, traffic, fuel load, track evolution, weather, and other race conditions.
 
 ### Pre-race strategy planning
 
+![PitWall AI pre-race planner](screenshots/pre-race-planner.png)
+
 When a selected race session is not available yet, the pre-race planner can generate illustrative strategy candidates from configurable race distance, pit-stop loss, stint constraints, and compound assumptions. The assumptions are not official tyre measurements, and estimated times should not be interpreted as verified race forecasts.
 
 ### Robustness and sensitivity analysis
+
+![PitWall AI strategy robustness analysis](screenshots/strategy-robustness.png)
 
 The robustness view compares candidate strategies across multiple pit-loss and tyre-degradation scenarios. Scenario ranks and win rates describe only the tested assumptions; they are not real-world probabilities.
 
